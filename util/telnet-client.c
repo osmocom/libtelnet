@@ -21,6 +21,7 @@
 #include <ctype.h>
 #include <termios.h>
 #include <unistd.h>
+#include <libgen.h>
 
 #ifdef HAVE_ZLIB
 #include "zlib.h"
@@ -149,7 +150,8 @@ int main(int argc, char **argv) {
 
 	/* check usage */
 	if (argc != 3) {
-		fprintf(stderr, "Usage:\n ./telnet-client <host> <port>\n");
+		fprintf(stderr, "Usage:\n %s <host> <port>\n",
+			basename(argv[0]));
 		return 1;
 	}
 
