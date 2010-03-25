@@ -135,6 +135,8 @@ static void _event_handler(telnet_t *telnet, telnet_event_t *ev,
 	}
 }
 
+extern int ipaccess_telnet_auth(int sock);
+
 int main(int argc, char **argv) {
 	char buffer[512];
 	int rs;
@@ -183,6 +185,10 @@ int main(int argc, char **argv) {
 
 	/* free address lookup info */
 	freeaddrinfo(ai);
+
+#if NANO_BTS_CLI_CLIENT
+	ipaccess_telnet_auth(sock);
+#endif
 
 	/* get current terminal settings, set raw mode, make sure we
 	 * register atexit handler to restore terminal settings
