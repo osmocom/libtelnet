@@ -1,6 +1,9 @@
 AM_CFLAGS = -I..
 AM_LDFLAGS = -L..
 
+ipaccess_telnet_SOURCES = telnet-client-ipa.c ../libtelnet.h
+ipaccess_telnet_LDADD = ../libtelnet.la -lssl
+
 telnet_client_SOURCES = telnet-client.c ../libtelnet.h
 telnet_client_LDADD = ../libtelnet.la
 
@@ -10,4 +13,4 @@ telnet_chatd_LDADD = ../libtelnet.la
 telnet_proxy_SOURCES = telnet-proxy.c ../libtelnet.h
 telnet_proxy_LDADD = ../libtelnet.la
 
-bin_PROGRAMS = telnet-client telnet-chatd telnet-proxy
+bin_PROGRAMS = telnet-client telnet-chatd telnet-proxy ipaccess-telnet
