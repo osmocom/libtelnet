@@ -52,8 +52,16 @@ static void _input(char *buffer, int size) {
 	for (i = 0; i != size; ++i) {
 		/* if we got a CR or LF, replace with CRLF
 		 * NOTE that usually you'd get a CR in UNIX, but in raw
-		 * mode we get LF instead (not sure why)
+		 * mode we get LF instead (not sure why).
+		 * For CTRL+C (SIGINT), CTRL+D (EOF) we will exit
 		 */
+#if NANO_BTS_CLI_CLIENT
+		if (buffer[i] == 3 || buffer[i] == 4) {
+			printf("%s terminating.\r\n",
+			       buffer[i] == 3 ? "SIGINT" : "EOF");
+			exit(0);
+		}
+#endif
 		if (buffer[i] == '\r' || buffer[i] == '\n') {
 			if (do_echo)
 				printf("\r\n");
