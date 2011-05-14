@@ -89,11 +89,19 @@ static void _send(int sock, const char *buffer, size_t size) {
 static void _event_handler(telnet_t *telnet, telnet_event_t *ev,
 		void *user_data) {
 	int sock = *(int*)user_data;
+	int i;
 
 	switch (ev->type) {
 	/* data received */
 	case TELNET_EV_DATA:
-		printf("%.*s", (int)ev->size, ev->buffer);
+		for (i = 0; i < ev->size; ++i) {
+			if (ev->buffer[i] == '\n') {
+				putchar('\r');
+				putchar('\n');
+			} else
+				putchar(ev->buffer[i]);
+		}
+		
 		fflush(stdout);
 		break;
 	/* data must be sent */
