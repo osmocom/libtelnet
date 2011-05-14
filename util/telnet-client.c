@@ -159,6 +159,7 @@ int main(int argc, char **argv) {
 	char buffer[512];
 	int rs;
 	int sock;
+	const char *port;
 	struct sockaddr_in addr;
 	struct pollfd pfd[2];
 	struct addrinfo *ai;
@@ -166,17 +167,19 @@ int main(int argc, char **argv) {
 	struct termios tios;
 
 	/* check usage */
-	if (argc != 3) {
-		fprintf(stderr, "Usage:\n %s <host> <port>\n",
+	if (argc < 2) {
+		fprintf(stderr, "Usage:\n %s <host> [<port>]\n",
 			basename(argv[0]));
 		return 1;
 	}
+
+	port = argc > 2 ? argv[2] : "3210";
 
 	/* look up server host */
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
-	if ((rs = getaddrinfo(argv[1], argv[2], &hints, &ai)) != 0) {
+	if ((rs = getaddrinfo(argv[1], port, &hints, &ai)) != 0) {
 		fprintf(stderr, "getaddrinfo() failed for %s: %s\n", argv[1],
 				gai_strerror(rs));
 		return 1;
