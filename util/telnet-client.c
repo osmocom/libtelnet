@@ -202,7 +202,11 @@ int main(int argc, char **argv) {
 	tcsetattr(STDOUT_FILENO, TCSADRAIN, &tios);
 
 	/* set input echoing on by default */
+#if NANO_BTS_CLI_CLIENT
+	do_echo = 0;
+#else
 	do_echo = 1;
+#endif
 
 	/* initialize telnet box */
 	telnet = telnet_init(telopts, _event_handler, 0, &sock);
