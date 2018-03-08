@@ -30,7 +30,7 @@ static void compute_response(unsigned char *ubChallenge, unsigned char *ubRespon
 }
 
 // nanoBTS Challenge/Response
-int ipaccess_telnet_auth(int sock)
+void ipaccess_telnet_auth(int sock)
 {
 	char buffer[512];
 	int rs;
