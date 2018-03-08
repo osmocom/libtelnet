@@ -5,6 +5,10 @@ AM_INIT_AUTOMAKE
 AC_PROG_CC
 AC_PROG_LIBTOOL
 
+PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
+PKG_CHECK_MODULES(LIBSSL, libssl)
+
+
 # zlib support
 AC_CHECK_LIB(z,deflate,ZLIB=yes,ZLIB=no)
 if test "x$ZLIB" = "xyes" ; then
