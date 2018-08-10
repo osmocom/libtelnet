@@ -1,9 +1,9 @@
-AM_CFLAGS = -I..
-AM_LDFLAGS = -L..
+AM_CFLAGS = -I$(srcdir)/..
+AM_LDFLAGS = -L$(builddir)/..
 
 ipaccess_telnet_SOURCES = telnet-client.c ../libtelnet.h ipaccess-auth.c
 ipaccess_telnet_LDADD = ../libtelnet.la -lssl -lcrypto
-ipaccess_telnet_CFLAGS = -DNANO_BTS_CLI_CLIENT -I..
+ipaccess_telnet_CFLAGS = -DNANO_BTS_CLI_CLIENT -I$(srcdir)/..
 
 telnet_client_SOURCES = telnet-client.c ../libtelnet.h
 telnet_client_LDADD = ../libtelnet.la
