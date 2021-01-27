@@ -2,6 +2,8 @@ AC_INIT([libtelnet], [0.13], [http://github.com/elanthis/libtelnet/tree/master])
 
 AM_INIT_AUTOMAKE
 
+CFLAGS="$CFLAGS -std=gnu11"
+
 AC_PROG_CC
 AC_PROG_LIBTOOL
 
